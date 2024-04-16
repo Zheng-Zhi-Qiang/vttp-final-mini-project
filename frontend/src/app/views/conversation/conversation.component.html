@@ -11,6 +11,10 @@
                 <td>Location</td>
                 <td>{{ listing.city }} {{ listing.postal }}<br>{{ listing.state }}, {{ listing.country }}<br>{{ listing.address == undefined ? "" : listing.address }}</td>
             </tr>
+            <tr>
+                <td>Period</td>
+                <td>{{ listing.period.from | date:'dd/MM/yyyy' }} - {{ listing.period.to | date:'dd/MM/yyyy' }}</td>
+            </tr>
             <tr *ngIf="listing.type != 'Apartment Hunting'">
                 <td>Amenities</td>
                 <td>

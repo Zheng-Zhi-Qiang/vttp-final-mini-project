@@ -11,7 +11,7 @@
                 <div class="listings_list" *ngIf="listings.length > 0; else noListing">
                     <div class="listing_item mb-2 flex flex-row align-items-center" *ngFor="let listing of listings" [routerLink]="['/listing', listing.listing_id]">
                         <p class="ml-1">{{ listing.city }}, {{ listing.state }}, {{ listing.country }}</p>
-                        <p class="ml-auto">{{ listing.period.from | date }} - {{ listing.period.to | date }}</p>
+                        <p class="ml-auto">{{ listing.period.from | date:'dd/MM/yyyy' }} - {{ listing.period.to | date:'dd/MM/yyyy' }}</p>
                         <div class="ml-auto flex flex-row align-items-center">
                             <i *ngIf="listing.filled" pTooltip="Listing has been filled as payment has been made" tooltipPosition="bottom" [showDelay]="1000" class="pi pi-check mr-3" style="font-size: 1.3rem; color: green;"></i>
                             <p-button size="large" [icon]="listing.hidden == true ? 'pi pi-eye' : 'pi pi-eye-slash'" 

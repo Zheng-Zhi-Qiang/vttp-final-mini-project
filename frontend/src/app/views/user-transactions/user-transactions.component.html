@@ -7,7 +7,7 @@
             <div *ngIf="transactions$ | async as transactions">
                 <div class="transactions_list" *ngIf="transactions.length > 0; else noTransaction">
                     <div [class]="'transaction mb-2 flex flex-row align-items-center ' + (userId == transaction.payee ? 'received' : 'payment')" *ngFor="let transaction of transactions">
-                        <p class="ml-1">{{ transaction.date | date }}</p>
+                        <p class="ml-1">{{ transaction.date | date:'dd/MM/yyyy' }}</p>
                         <p class="ml-auto">{{ transaction.amount | currency:"USD" }}</p>
                         <p class="ml-auto">Listing: <a [routerLink]="['/listing', transaction.listing_id]">{{ transaction.listing_id }}</a></p>
                     </div>

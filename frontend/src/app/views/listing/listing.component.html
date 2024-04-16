@@ -26,6 +26,10 @@
                 <td>City: </td>
                 <td>{{ listing.city }}</td>
             </tr>
+            <tr>
+                <td>Date: </td>
+                <td>{{ listing.period.from | date }} - {{ listing.period.to | date }}</td>
+            </tr>
         </table>
         <p-panel header="About Me">{{ listing.introduction }}</p-panel>
     </div>

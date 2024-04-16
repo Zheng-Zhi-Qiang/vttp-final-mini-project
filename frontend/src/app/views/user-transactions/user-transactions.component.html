@@ -1,0 +1,23 @@
+<app-nav-bar [searchBar]="false"></app-nav-bar>
+<p-divider [style]="{margin: 0}"></p-divider>
+<div class="flex flex-column justify-content-center">
+    <div class="flex flex-row justify-content-center">
+        <div class="transaction_div flex flex-column align-items-center mt-2">
+            <h1 class="mr-auto">Transactions</h1>
+            <div *ngIf="transactions$ | async as transactions">
+                <div class="transactions_list" *ngIf="transactions.length > 0; else noTransaction">
+                    <div [class]="'transaction mb-2 flex flex-row align-items-center ' + (userId == transaction.payee ? 'received' : 'payment')" *ngFor="let transaction of transactions">
+                        <p class="ml-1">{{ transaction.date | date }}</p>
+                        <p class="ml-auto">{{ transaction.amount | currency:"USD" }}</p>
+                        <p class="ml-auto">Listing: <a [routerLink]="['/listing', transaction.listing_id]">{{ transaction.listing_id }}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #noTransaction>
+    <div>
+        <h3>No Transactions!</h3>
+    </div>
+</ng-template>

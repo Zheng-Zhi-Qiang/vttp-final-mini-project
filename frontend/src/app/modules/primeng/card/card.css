@@ -1,0 +1,8 @@
+@layer primeng {
+    .p-card-header img {
+        width: 100%;
+    }
+    .p-card-body :hover {
+        cursor: pointer;
+    }
+}

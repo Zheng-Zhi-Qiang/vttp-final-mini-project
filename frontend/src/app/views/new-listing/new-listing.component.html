@@ -1,0 +1,92 @@
+<app-nav-bar [searchBar]="false"></app-nav-bar>
+<p-divider [style]="{margin: 0}"></p-divider>
+<h2 class="ml-3 pl-1 mt-2 mb-0">Create Listing</h2>
+<div class="flex flex-row justify-content-start align-items-center">
+    <form [formGroup]="listingForm" (submit)="processForm()">
+        <div class="listing-form flex flex-column ml-3 mr-auto pl-1 pr-8">
+            <div class="period-fields flex flex-row justify-content-start align-items-center mt-4">
+                <p-floatLabel class="mr-3">
+                    <p-calendar [iconDisplay]="'input'" [showIcon]="true" inputId="from_date" formControlName="from" [minDate]="today" ></p-calendar>
+                    <label for="from_date">From</label>
+                </p-floatLabel>
+                <p-floatLabel class="ml-auto">
+                    <p-calendar [iconDisplay]="'input'" [showIcon]="true" inputId="to_date" formControlName="to" [minDate]="today"></p-calendar>
+                    <label for="to_date">To</label>
+                </p-floatLabel>
+            </div>
+            <p-floatLabel class="mt-4">
+                <input type="text" pInputText inputId="country" formControlName="country"/>
+                <label for="country">Country</label>
+            </p-floatLabel>
+            <p-floatLabel class="mt-4">
+                <input type="text" pInputText inputId="state" formControlName="state"/>
+                <label for="state">State</label>
+            </p-floatLabel>
+            <p-floatLabel class="mt-4">
+                <input type="text" pInputText inputId="city" formControlName="city"/>
+                <label for="city">City</label>
+            </p-floatLabel>
+            <p-floatLabel class="mt-4">
+                <input type="text" pInputText inputId="name" formControlName="name"/>
+                <label for="name">Your Name</label>
+            </p-floatLabel>
+            <p-floatLabel class="mt-5">
+                <textarea id="introduction" rows="5" cols="50" pInputTextarea [autoResize]="true" formControlName="introduction"></textarea>
+                <label for="introduction">Introduce yourself!</label>
+            </p-floatLabel>
+            <p-dropdown class="mt-2" inputId="type" formControlName="type" [options]="listingTypes" placeholder="Select a listing type"></p-dropdown>
+            <div class="ml-auto" *ngIf="listingForm.get('type')?.value === 'Apartment Hunting' || listingForm.get('type')?.value === ''; else apartmentFound">
+                <p-button type="submit" label="List" [outlined]="true" [rounded]="true" severity="info" [disabled]="listingForm.invalid"></p-button>
+            </div>
+            <ng-template #apartmentFound>
+                <p-floatLabel class="mt-5">
+                    <input class="w-full" type="text" pInputText inputId="address" formControlName="address"/>
+                    <label for="address">Address</label>
+                </p-floatLabel>
+                <p-floatLabel class="mt-5">
+                    <input type="text" pInputText inputId="postal" formControlName="postal"/>
+                    <label for="postal">Postal</label>
+                </p-floatLabel>
+                <p-floatLabel class="mt-5">
+                    <p-inputNumber mode="currency" currency="USD" locale="en-US" formControlName="deposit" inputId="deposit"></p-inputNumber>
+                    <label for="deposit">Deposit</label>
+                </p-floatLabel>
+                <div class="flex flex-column mt-5 align-items-center justify-content-between listing-images">
+                    <div *ngIf="imageFiles$ | async as images" class="card images">
+                        <p-galleria *ngIf="images.length > 0; else noImage" [value]="images" [numVisible]="2" [responsiveOptions]="responsiveOptions">
+                            <ng-template pTemplate="item" let-item>
+                                <img [src]="item.imageUrl" style="width: 100%;" />
+                            </ng-template>
+                            <ng-template pTemplate="thumbnail" let-item>
+                                <div class="grid grid-nogutter justify-content-center">
+                                    <img [src]="item.imageUrl" class="thumbnail"/>
+                                </div>
+                            </ng-template>
+                        </p-galleria>
+                        <ng-template #noImage>
+                            <img src="https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png" class="filler" alt="">
+                        </ng-template>
+                    </div>
+                    <p-fileUpload class="mt-3" (onClear)="onClear()" (onRemove)="onRemove($event) "(onSelect)="onSelect($event)" [multiple]="true" accept="image/*" [maxFileSize]="200000000" 
+                            [showUploadButton]="false" [fileLimit]="10"></p-fileUpload>
+                </div>
+                <p-multiSelect class="mt-5" [options]="amenities" formControlName="amenities" placeholder="Select available amenties"></p-multiSelect>
+                <p-floatLabel class="mt-5">
+                    <textarea id="description" rows="5" cols="50" pInputTextarea [autoResize]="true" formControlName="description"></textarea>
+                    <label for="description">Description</label>
+                </p-floatLabel>
+                <p-button class="ml-auto mb-2" type="submit" label="List" [outlined]="true" [rounded]="true" severity="info" [disabled]="listingForm.invalid"></p-button>
+            </ng-template>
+        </div>
+    </form>
+    <div class="set-map flex flex-column ml-auto mr-3">
+        <div class="flex mb-2 justify-content-center align-items-center" *ngIf="listingForm.get('location')?.hasError('locationSet')">
+            <b>Set your location on the map below!</b>
+        </div>
+        <div class="map flex flex-column justify-content-start">
+            <app-search-bar buttonSeverity="info" [buttonOutlined]="true" [buttonRounded]="true" [dateSelector]="false"></app-search-bar>
+            <app-set-location-map class="set-location-map" (setLocation)="setLocation($event)"></app-set-location-map>
+        </div>
+    </div>
+    <p-toast position="bottom-right" [life]="8000"[showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'300ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+</div>

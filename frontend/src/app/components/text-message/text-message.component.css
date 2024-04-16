@@ -1,0 +1,22 @@
+.text {
+    color: white;
+    max-width: 45%;
+    max-height: fit-content;
+    border-radius: 2vh;
+    word-wrap: break-word;
+}
+
+.user {
+    background-color: #6495ED;
+    margin-left: auto;
+}
+
+.receiver {
+    background-color: #808080;
+    margin-right: auto;
+}
+
+.txt {
+    margin: 0;
+    padding: 3%;
+}

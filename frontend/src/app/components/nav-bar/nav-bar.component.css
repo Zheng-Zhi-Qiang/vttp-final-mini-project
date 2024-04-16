@@ -1,0 +1,19 @@
+::ng-deep p-menubarsub {
+    width: 100%;
+}
+::ng-deep .p-menubar-root-list>li:last-child .p-submenu-list {
+    right: 0;
+}
+
+.profile-menu {
+    margin-left: auto;
+}
+
+app-brand {
+    margin-right: auto;
+}
+
+app-search-bar {
+    max-width: 50%;
+    flex-grow: 1;
+}

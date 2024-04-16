@@ -1,0 +1,13 @@
+<p-card [header]="name" [subheader]="period" [style]="{overflow: 'hidden'}" [bodyFunction]="navigate()">
+    <ng-template pTemplate="header">
+        <p-galleria [value]="images" [showItemNavigators]="true" [showItemNavigatorsOnHover]="true" [showThumbnails]="false" 
+        [circular]="true" [showIndicators]="true" [showIndicatorsOnItem]="true">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="item" style="width: 18vw; height: 30vh;" />
+            </ng-template>
+        </p-galleria>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-chip [label]="type"></p-chip>
+    </ng-template>
+</p-card>

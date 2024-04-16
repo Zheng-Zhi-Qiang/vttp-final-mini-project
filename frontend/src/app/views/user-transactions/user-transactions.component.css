@@ -1,0 +1,29 @@
+.transaction_div {
+    width: 50vw;
+}
+
+.transaction {
+    width: 50vw;
+    border-radius: 2vh;
+    padding: 1%;
+    border: solid 1px lightblue;
+}
+
+.transactions_list {
+    height: 75vh;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.payment {
+    background-color: #fde0e0;
+}
+
+.received {
+    background-color: #e8f4ea;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

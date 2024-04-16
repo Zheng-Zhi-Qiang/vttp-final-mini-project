@@ -1,0 +1,45 @@
+<app-nav-bar [searchBar]="false"></app-nav-bar>
+<p-divider [style]="{margin: 0}"></p-divider>
+<div class="flex flex-row justify-content-start mt-3">
+    <div class="details flex flex-column justify-content-start ml-2">
+        <table *ngIf="listing$ | async as listing; else notAvailable">
+            <tr>
+                <td>Listing Type</td>
+                <td>{{ listing.type }}</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>{{ listing.city }} {{ listing.postal }}<br>{{ listing.state }}, {{ listing.country }}<br>{{ listing.address == undefined ? "" : listing.address }}</td>
+            </tr>
+            <tr *ngIf="listing.type != 'Apartment Hunting'">
+                <td>Amenities</td>
+                <td>
+                    <ul class="amenity_list mt-0">
+                        <li *ngFor="let a of listing.amenities">{{ a }}</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p-divider [style]="{margin: 0}" layout="vertical"></p-divider>
+    <div class="message_container flex flex-column ml-4" *ngIf="otherUserProfile$ | async as otherUserProfile">
+        <h2 class="name">{{ otherUserProfile.first_name }}</h2>
+        <p-divider></p-divider>
+        <div #messages class="messages flex flex-column" *ngIf="convo$ | async as convo" [scrollTop]="messages.scrollHeight">
+            <app-text-message *ngFor="let message of convo?.messages" [isUser]="message.sender == userId" [text]="message.message"></app-text-message>
+        </div>
+        <form [formGroup]="msgForm" (submit)="sendMessage()">
+            <div class="message_form flex flex-row mt-2">
+                <input class="w-full" type="text" pInputText formControlName="message"/>
+                <p-button type="button" icon="pi pi-send" [outlined]="true" [rounded]="true" 
+                    severity="info" (onClick)="sendMessage()"></p-button>
+            </div>
+        </form>
+    </div>
+</div>
+<p-toast position="bottom-right" [life]="8000"[showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'300ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+<ng-template #notAvailable>
+    <div class="flex flex-row justify-content-center">
+        <h3>Listing details no longer available. Please contact our team should you require the details.</h3>
+    </div>
+</ng-template>

@@ -1,0 +1,15 @@
+.listing-container {
+    height: 85vh;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.listings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

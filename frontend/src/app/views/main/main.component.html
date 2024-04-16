@@ -1,0 +1,27 @@
+<app-nav-bar [searchBar]="true" [dateSelector]="true"></app-nav-bar>
+<p-divider [style]="{margin: 0}"></p-divider>
+<div class="flex flex-row mt-2">
+    <div *ngIf="listings == undefined || listings.length > 0; else noListings" class="listing-container flex flex-column align-items-center">
+        <div class="listings">
+            <div class="listing col p-3" *ngFor="let listing of listings">
+                <app-listing-card [images]="listing.images!.length > 0 ? listing.images : defaultImage" 
+                [period]="(listing.period.from | date) + ' - ' + (listing.period.to | date)" [name]="listing.name" [type]="listing.type" [listingId]="listing.listing_id"></app-listing-card>
+            </div>
+        </div>
+        <p-paginator class="ml-auto" (onPageChange)="onPageChange($event)" 
+        [first]="first" [rows]="rows" [totalRecords]="totalPages" [rowsPerPageOptions]="[1, 10, 20]" 
+        [showCurrentPageReport]="true" [showFirstLastIcon]="false"
+        [currentPageReportTemplate]="(first * 3 + 1) + ' - ' + (page * 3 * rows > totalRecords ? totalRecords : page * 3 * rows) + ' of ' + totalRecords"></p-paginator>
+    </div>
+    <div class="mt-2 ml-auto">
+        <app-google-map (mapBoundary)="getListingsByMapBoundary($event)" [listings]="listings"></app-google-map>
+    </div>
+</div>
+<p-toast position="bottom-right" [life]="8000"[showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'300ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+<ng-template #noListings>
+    <div class="flex flex-column justify-content-center w-full">
+        <div class="flex flex-row justify-content-center w-full">
+            <h3>No available listings!</h3>
+        </div>
+    </div>
+</ng-template>

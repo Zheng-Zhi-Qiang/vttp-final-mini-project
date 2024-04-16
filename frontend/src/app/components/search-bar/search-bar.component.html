@@ -1,0 +1,10 @@
+<form [formGroup]="form" (submit)="dateSelector ? searchGeocodeAndPeriod(): searchGeocode()">
+    <div class="flex flex-row justify-content-center">
+            <div class="input-grp flex p-input-icon-left mr-2">
+                <i class="pi pi-map-marker"></i>
+                <input type="text" pInputText placeholder="Search" formControlName="address"/>
+            </div>
+            <p-calendar *ngIf="dateSelector" [iconDisplay]="'input'" [showIcon]="true" formControlName="period" [minDate]="today" selectionMode="range" [required]="true"></p-calendar>
+            <p-button type="submit" icon="pi pi-search" [text]="buttonText" [severity]="buttonSeverity" [rounded]="buttonRounded" [disabled]="form.invalid"></p-button>
+    </div>
+</form>

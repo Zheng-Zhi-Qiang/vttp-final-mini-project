@@ -1,0 +1,18 @@
+.listing-container {
+    height: 85vh;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.listings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 75vh;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

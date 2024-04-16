@@ -1,0 +1,12 @@
+<google-map 
+    height="75vh"
+    width="null"
+    [center]="center"
+    [zoom]="zoom"
+    (mapClick)="addMarker($event)"
+    [options]="mapOptions"
+    mapId="42d3ca9eb00af06d">
+    @for (position of markerPositions; track position) {
+    <map-advanced-marker [position]="position" [gmpDraggable]="true"/>
+    }
+</google-map>

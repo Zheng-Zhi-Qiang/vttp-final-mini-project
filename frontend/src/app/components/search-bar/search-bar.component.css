@@ -1,0 +1,11 @@
+input {
+    flex-grow: 1;
+}
+
+.input-grp {
+    flex-grow: 1;
+}
+
+::ng-deep .p-datepicker * {
+    padding: 0;
+}

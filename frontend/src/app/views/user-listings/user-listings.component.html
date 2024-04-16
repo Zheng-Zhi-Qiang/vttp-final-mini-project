@@ -1,0 +1,34 @@
+<app-nav-bar [searchBar]="false"></app-nav-bar>
+<p-divider [style]="{margin: 0}"></p-divider>
+<div class="flex flex-column justify-content-center">
+    <div class="flex flex-row justify-content-center">
+        <div class="listing_div flex flex-column align-items-center mt-2">
+            <div class="heading flex flex-row align-items-center">
+                <h1 class="mr-auto">Listings</h1>
+                <p-button class="ml-auto" type="button" pTooltip="New Listing" tooltipPosition="top" [showDelay]="1000" icon="pi pi-plus" [text]="true" [rounded]="true" size="large" [routerLink]="['/listing']"></p-button>
+            </div>
+            <div *ngIf="listings$ | async as listings">
+                <div class="listings_list" *ngIf="listings.length > 0; else noListing">
+                    <div class="listing_item mb-2 flex flex-row align-items-center" *ngFor="let listing of listings" [routerLink]="['/listing', listing.listing_id]">
+                        <p class="ml-1">{{ listing.city }}, {{ listing.state }}, {{ listing.country }}</p>
+                        <p class="ml-auto">{{ listing.period.from | date }} - {{ listing.period.to | date }}</p>
+                        <div class="ml-auto flex flex-row align-items-center">
+                            <i *ngIf="listing.filled" pTooltip="Listing has been filled as payment has been made" tooltipPosition="bottom" [showDelay]="1000" class="pi pi-check mr-3" style="font-size: 1.3rem; color: green;"></i>
+                            <p-button size="large" [icon]="listing.hidden == true ? 'pi pi-eye' : 'pi pi-eye-slash'" 
+                                [rounded]="true" [text]="true" severity="info" [pTooltip]="listing.hidden == true ? 'Show Your Listing' : 'Hide Your Listing'" tooltipPosition="bottom" [showDelay]="1000"
+                                (onClick)="toggleListingVisibility($event, listing.listing_id!, listing.hidden!)" [disabled]="listing.filled"></p-button>
+                            <p-button size="large" icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" 
+                                (onClick)="deleteListing($event, listing.listing_id!)"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast position="bottom-right" [life]="8000"[showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'300ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+<ng-template #noListing>
+    <div>
+        <h3>No listings!</h3>
+    </div>
+</ng-template>

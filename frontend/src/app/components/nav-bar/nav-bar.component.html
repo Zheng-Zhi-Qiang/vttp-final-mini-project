@@ -1,0 +1,12 @@
+<div class="flex flex-row justify-content-center align-items-center">
+    <app-brand></app-brand>
+    <app-search-bar class="ml-2" *ngIf="searchBar" [buttonText]="true" [dateSelector]="dateSelector"></app-search-bar>
+    <div class="profile-menu">
+        <p-button type="button" pTooltip="Your Transaction History" tooltipPosition="bottom" [showDelay]="1000" icon="pi pi-history" [text]="true" [rounded]="true" size="large" [routerLink]="['/user/transactions']"></p-button>
+        <p-button type="button" pTooltip="Your Bookmarks" tooltipPosition="bottom" [showDelay]="1000" icon="pi pi-bookmark" [text]="true" [rounded]="true" size="large" [routerLink]="['/user/bookmarks']"></p-button>
+        <p-button type="button" pTooltip="Your Listings" tooltipPosition="bottom" [showDelay]="1000" icon="pi pi-list" [text]="true" [rounded]="true" size="large" [routerLink]="['/user/listings']"></p-button>
+        <p-button type="button" pTooltip="Your Chats" tooltipPosition="bottom" [showDelay]="1000" icon="pi pi-comments" [text]="true" [rounded]="true" size="large" [routerLink]="['/conversations']"></p-button>
+        <p-menu #menu [model]="items" [popup]="true"></p-menu>
+        <p-button type="button" icon="pi pi-user" (onClick)="menu.toggle($event)" [text]="true" [rounded]="true" size="large"></p-button>
+    </div>
+</div>

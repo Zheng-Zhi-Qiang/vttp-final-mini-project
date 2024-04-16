@@ -1,0 +1,28 @@
+.listing_div {
+    width: 50vw;
+}
+
+.listing_item {
+    width: 50vw;
+    border-radius: 2vh;
+    padding: 1%;
+    border: solid 1px lightblue;
+}
+.listings_list {
+    height: 75vh;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.listing_item:hover {
+    cursor: pointer;
+}
+
+.heading {
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

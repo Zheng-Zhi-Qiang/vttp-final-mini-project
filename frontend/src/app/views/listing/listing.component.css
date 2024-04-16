@@ -1,0 +1,21 @@
+.images {
+    height: 60vh;
+    width: 50vw;
+}
+
+.thumbnail {
+    max-width: 20%;
+}
+
+.amenity_list {
+    padding-left: 1%;
+}
+
+td {
+    vertical-align: top;
+    padding-bottom: 1em;
+}
+
+.heading {
+    max-width: 85%;
+}

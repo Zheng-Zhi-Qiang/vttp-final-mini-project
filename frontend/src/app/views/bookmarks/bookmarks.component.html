@@ -1,0 +1,21 @@
+<app-nav-bar [searchBar]="false" [dateSelector]="false"></app-nav-bar>
+<p-divider [style]="{margin: 0}"></p-divider>
+<div class="flex flex-row mt-2">
+    <div class="listing-container flex flex-column align-items-center">
+        <h1>Bookmarks</h1>
+        <div class="listings" *ngIf="listings == undefined || listings.length > 0; else noListings">
+            <div class="listing col p-3" *ngFor="let listing of listings">
+                <app-listing-card [images]="listing.images!.length > 0 ? listing.images : defaultImage" 
+                [period]="(listing.period.from | date) + ' - ' + (listing.period.to | date)" [name]="listing.name" [type]="listing.type" [listingId]="listing.listing_id"></app-listing-card>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast position="bottom-right" [life]="8000"[showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'300ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+<ng-template #noListings>
+    <div class="flex flex-column justify-content-center w-full">
+        <div class="flex flex-row justify-content-center w-full">
+            <h3>You don't have any bookmarks!</h3>
+        </div>
+    </div>
+</ng-template>

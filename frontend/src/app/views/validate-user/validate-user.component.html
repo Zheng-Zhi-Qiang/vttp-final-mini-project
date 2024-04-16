@@ -1,0 +1,25 @@
+<app-nav-bar [searchBar]="false"></app-nav-bar>
+<p-divider [style]="{margin: 0}"></p-divider>
+<form (submit)="onSubmit()" [formGroup]="form">
+    <div class="flex flex-row justify-content-center">
+        <div *ngIf="userNotCreated; else created" class="flex flex-column align-items-center mt-8 w-3">
+            <h1 class="mr-auto m-0">Welcome to BuddyFinder!</h1>
+            <h3 class="mr-auto m-0 pt-1">Please enter the following details to create your profile!</h3>
+            <p-floatLabel class="mt-5 w-full">
+                <input class="w-full" type="text" pInputText inputId="firstName" formControlName="firstName"/>
+                <label for="firstName">First Name</label>
+            </p-floatLabel>
+            <p-floatLabel class="mt-5 w-full">
+                <input class="w-full" type="text" pInputText inputId="lastName" formControlName="lastName"/>
+                <label for="lastName">Last Name</label>
+            </p-floatLabel>
+            <p-button class="mt-3" type="submit" label="Let's Go!" [outlined]="true" [rounded]="true" severity="info" [disabled]="form.invalid"></p-button>
+        </div>
+    </div>
+</form>
+<p-toast position="bottom-right" [life]="8000"[showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'300ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+<ng-template #created>
+    <div class="mt-8">
+        <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    </div>
+</ng-template>

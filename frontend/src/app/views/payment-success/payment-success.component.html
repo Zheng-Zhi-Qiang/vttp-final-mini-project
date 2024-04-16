@@ -1,0 +1,18 @@
+<app-nav-bar [searchBar]="false"></app-nav-bar>
+<p-divider [style]="{margin: 0}"></p-divider>
+<div class="flex flex-row justify-content-center mt-2">
+    <div class="flex flex-column justify-content-center h-30rem w-30rem">
+        <div class="flex flex-column align-items-center">
+            <i class="pi pi-check-circle" style="font-size: 2.5rem"></i>
+            <h2>Payment Successful!</h2>
+            <p class="mt-0">Your payment has been completed.</p>
+        </div>
+        <div class="flex mt-2">
+            <p-button class="mr-auto" type="button" label="Home" [outlined]="true" [rounded]="true" icon="pi pi-home"
+                                    iconPos="left" severity="info" [routerLink]="['/']"></p-button>
+            <p-button class="ml-auto" type="button" label="Transactions" [outlined]="true" [rounded]="true" icon="pi pi-history"
+                                    iconPos="left" severity="info" [routerLink]="['/user/transactions']"></p-button>
+        </div>
+    </div>
+</div>
+<p-toast position="bottom-right" [life]="8000"[showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'300ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>

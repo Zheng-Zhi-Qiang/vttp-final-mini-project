@@ -1,0 +1,36 @@
+.details {
+    width: 25vw;
+}
+
+.message_container {
+    height: 85vh;
+    width: 50vw;
+}
+
+.name {
+    margin-bottom: 0;
+}
+
+.message_form {
+    width: 100%;
+}
+
+.messages {
+    flex-grow: 1;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.amenity_list {
+    padding-left: 1%;
+}
+
+td {
+    vertical-align: top;
+    padding-bottom: 1em;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

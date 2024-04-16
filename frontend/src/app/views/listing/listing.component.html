@@ -1,0 +1,90 @@
+<app-nav-bar [searchBar]="false"></app-nav-bar>
+<p-divider [style]="{'margin': 0}"></p-divider>
+<div *ngIf="listing$ | async as listing; else notAvailable" class="flex flex-column mt-2 align-items-center">
+    <div class="ml-3 w-8">
+        <div class="flex flex-row align-items-center">
+            <h1 class="heading">Hello! My name is {{ listing.name }} and I am looking for room mates!</h1>
+            <p-button *ngIf="userId != listing.lister_id" class="ml-auto" type="button" 
+                            pTooltip="Chat with {{listing.name}}!" tooltipPosition="top" 
+                            [showDelay]="1000" icon="pi pi-comment" size="large" [text]="true" [rounded]="true" 
+                            severity="info" (onClick)="message(listing)"></p-button>
+            <p-button *ngIf="userId != listing.lister_id" type="button" 
+                            pTooltip="Save listing" tooltipPosition="top" 
+                            [showDelay]="1000" [icon]="'pi '+ bookmark" size="large" [text]="true" [rounded]="true" 
+                            severity="info" (onClick)="toggleBookmark(listing.listing_id!)"></p-button>
+        </div>
+        <table class="mb-2">
+            <tr>
+                <td>Country: </td>
+                <td>{{ listing.country }}</td>
+            </tr>
+            <tr>
+                <td>State: </td>
+                <td>{{ listing.state }}</td>
+            </tr>
+            <tr>
+                <td>City: </td>
+                <td>{{ listing.city }}</td>
+            </tr>
+        </table>
+        <p-panel header="About Me">{{ listing.introduction }}</p-panel>
+    </div>
+    <div *ngIf="listing.type != 'Apartment Hunting'" class="flex flex-row mt-5">
+        <div class="ml-3">
+            <p-galleria [value]="listing.images" [autoPlay]="true" [circular]="true" [responsiveOptions]="responsiveOptions" [numVisible]="5"  [containerStyle]="{ 'max-width': '50vw' }"> 
+                <ng-template pTemplate="item" let-item>
+                    <div  class="images flex justify-content-center">
+                        <img [src]="item" style="width: auto; height: auto; max-width: 100%; max-height: 100%;" />
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="thumbnail" let-item>
+                    <div class="grid grid-nogutter justify-content-center">
+                        <img class="thumbnail" [src]="item" />
+                    </div>
+                </ng-template>
+            </p-galleria>
+        </div>
+        <p-divider layout="vertical"></p-divider>
+        <div class="location-details">
+            <table>
+                <tr>
+                    <td>Address: </td>
+                    <td>{{ listing.address }}</td>
+                </tr>
+                <tr>
+                    <td>Zip/Postal Code: </td>
+                    <td>{{ listing.postal }}</td>
+                </tr>
+                <tr>
+                    <td>Deposit: </td>
+                    <td>{{ listing.deposit == 0 ? "Not Required" : (listing.deposit | currency: 'USD') }}</td>
+                </tr>
+                <tr>
+                    <td>Amenties</td>
+                    <td>
+                        <ul class="amenity_list mt-0">
+                            <li *ngFor="let amenity of listing.amenities">{{ amenity }}</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Description: </td>
+                    <td>{{ listing.description }}</td>
+                </tr>
+                <tr *ngIf="userId != listing.lister_id">
+                    <td></td>
+                    <td>
+                        <p-button *ngIf="listing.deposit != 0" type="button" label="Pay deposit" [outlined]="true" [rounded]="true" 
+                            severity="info" (onClick)="goToPaymentSummary(listing)"></p-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<ng-template #notAvailable>
+    <div class="flex flex-row justify-content-center">
+        <h3>Listing no longer available. Please contact our team should you require the details.</h3>
+    </div>
+</ng-template>
+<p-toast position="bottom-right" [life]="8000"[showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'500ms'" [hideTransitionOptions]="'300ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>

@@ -1,0 +1,43 @@
+.convo_div {
+    width: 50vw;
+}
+
+.convo_item {
+    width: 50vw;
+    border-radius: 2vh;
+    padding: 1%;
+    border: solid 1px lightblue;
+}
+
+.convo_list {
+    height: 75vh;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.convo_item:hover {
+    cursor: pointer;
+}
+
+.verified {
+    color: green;
+    font-size: 1.2rem;
+}
+
+.name {
+    font-size: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: lightskyblue;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

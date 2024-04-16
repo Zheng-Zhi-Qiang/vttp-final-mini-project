@@ -1,0 +1,13 @@
+<google-map 
+    height="85vh"
+    width="38vw"
+    [center]="center"
+    [zoom]="zoom"
+    (boundsChanged)="getNewListingMarkers()"
+    [options]="mapOptions"
+    mapId="42d3ca9eb00af06d" #map>
+    @for (position of markerPositions; track position) {
+    <map-advanced-marker #marker="mapAdvancedMarker" [position]="position" [options]="markerOptions" (mapClick)="openInfoWindow(marker)"/>
+    }
+    <map-info-window>Info Window content</map-info-window>
+</google-map>

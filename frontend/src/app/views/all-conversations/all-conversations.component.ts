@@ -37,4 +37,9 @@ export class AllConversationsComponent implements OnInit {
       this.msgSvc.add({severity: "error", summary: "Error", detail: "Error encountered while deleting conversation. Please try again later."})
     })
   }
+
+  goTolisting(event: Event, listing_id: string){
+    event?.stopPropagation()
+    this.router.navigate(['/listing', listing_id])
+  }
 }

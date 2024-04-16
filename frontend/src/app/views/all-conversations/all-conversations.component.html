@@ -9,7 +9,7 @@
                     <div class="convo_item mb-2 flex flex-row align-items-center" *ngFor="let data of convo" (click)="onSelect(data.convo)">
                         <p class="name ml-1">{{ data.other_user.first_name }}</p>
                         <i *ngIf="data.other_user.verified" class="verified pi pi-verified ml-2"></i>
-                        <p class="ml-auto">Listing: <a [routerLink]="['/listing', data.convo.listing_id]">{{ data.convo.listing_id }}</a></p>
+                        <p class="ml-auto">Listing: <a (click)="goTolisting($event, data.convo.listing_id)">{{ data.convo.listing_id }}</a></p>
                         <p-button class="ml-auto" size="large" icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteConvo($event, data.convo.convo_id)"></p-button>
                     </div>
                 </div>
